@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  preparation:
+    image: php:7.4-cli
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ./prepare.sh
