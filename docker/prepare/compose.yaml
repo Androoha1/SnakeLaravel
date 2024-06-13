@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   preparation:
-    image: php:7.4-cli
+    image: ubuntu:latest
     volumes:
-      - .:/app
-    working_dir: /app
+      - ../..:/app
+    working_dir: /app/docker/prepare
     command: ./prepare.sh
