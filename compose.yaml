@@ -24,10 +24,12 @@ services:
 
   db:
     image: mysql:8.0
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: secret
+      MYSQL_USER: andrii
+      MYSQL_PASSWORD: 1111
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - db_data:/var/lib/mysql
