@@ -34,4 +34,5 @@
             @endforeach
         </tbody>
     </table>
+    <a href="{{ route('lobby') }}"><button>{{ __('messages.back_to_lobby') }}</button></a>
 @endsection
