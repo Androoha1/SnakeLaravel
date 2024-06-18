@@ -4,25 +4,27 @@
         <meta charset="UTF-8">
         <meta name="viewport", content="width=device-width, initial-scale=1.0">
         <title>{{ __('messages.play_snake_game') }}</title>
-        <link rel="stylesheet" href="snake.css">
-        <script src="main.js"></script>
-        <script src="SnakeClass.js"></script>
-        <script src="apple.js"></script>
+        <link rel="stylesheet" href="css/snake.css">
+        <script src="js/main.js"></script>
+        <script src="js/SnakeClass.js"></script>
+        <script src="js/AppleClass.js"></script>
+
+        <style>
+            .panel {
+            }
+        </style>
     </head>
 
     <body>
 
-        <div class="header">
-            <p id="score1" class="score">0</p>
-            <h1 id="name">WebSnake</h1>
-            <p id="score2" class="score">0</p>
-        </div>
+        <p id="score" style="color: darkgreen;" class="score">0</p>
         
-        <canvas id="board"></canvas>
+        <canvas id="board" style="border: 2px solid white;"></canvas>
 
-
-        <a href="{{ route('lobby') }}"><button>{{ __('messages.back_to_lobby') }}</button></a>
-        <a href="{{ route('players.index') }}"><button>{{ __('messages.list_of_players') }}</button></a>
+        <div class="panel">
+            <a href="/"><button>{{ __('messages.back_to_lobby') }}</button></a>
+            <a href="{{ route('players.index') }}"><button>{{ __('messages.list_of_players') }}</button></a>
+        </div>
 
     </body>
 </html>
