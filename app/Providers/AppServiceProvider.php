@@ -1,24 +1,19 @@
 <?php
-
+// app/Providers/AuthServiceProvider.php
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Models\Player;
+use App\Policies\PlayerPolicy;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
+    protected $policies = [
+        Player::class => PlayerPolicy::class,
+    ];
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
+    public function boot()
     {
-        //
+        $this->registerPolicies();
     }
 }
