@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,19 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class PlayerController extends Controller
 {
-    // List all players
     public function index()
     {
         $players = User::all();
         return view('players.index', compact('players'));
     }
 
-    // Show form to edit player information
     public function edit($id)
     {
         $player = User::findOrFail($id);
 
-        // Ensure the logged-in user can only edit their own profile
         if (Auth::id() !== $player->id) {
             abort(403);
         }
@@ -27,28 +25,23 @@ class PlayerController extends Controller
         return view('players.edit', compact('player'));
     }
 
-
-
     public function destroy($id)
     {
         $player = User::findOrFail($id);
 
-        // Ensure the logged-in user can only delete their own profile
         if (Auth::id() !== $player->id) {
             abort(403);
         }
 
         $player->delete();
 
-        return redirect()->route('players.index')->with('success', 'Player deleted successfully.');
+        return redirect()->route('lobby')->with('success', 'Player deleted successfully.');
     }
 
-    // Update player information
     public function update(Request $request, $id)
     {
         $player = User::findOrFail($id);
 
-        // Ensure the logged-in user can only update their own profile
         if (Auth::id() !== $player->id) {
             abort(403);
         }
@@ -71,7 +64,5 @@ class PlayerController extends Controller
         return redirect()->route('players.index')->with('success', 'Profile updated successfully.');
     }
 }
-
-
 
 

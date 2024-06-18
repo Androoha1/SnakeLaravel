@@ -11,25 +11,30 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Создание таблицы users с дополнительными полями
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
+            
+            // Добавление дополнительных полей
             $table->string('phone')->nullable();
             $table->integer('best_score')->default(0);
             $table->string('photo')->nullable();
-            $table->rememberToken();
-            $table->timestamps();
         });
 
+        // Создание таблицы password_reset_tokens
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Создание таблицы sessions
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

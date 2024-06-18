@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
     <h1>{{ __('messages.list_of_players') }}</h1>
     <table>
         <thead>
@@ -22,7 +24,7 @@
                     <td>{{ $player->best_score }}</td>
                     <td>
                         @if($player->photo)
-                            <img src="{{ asset('storage/' . $player->photo) }}" alt="{{ __('messages.user_photo') }}" style="width: 150px;">
+                        <img src="{{ asset('storage/' . $player->photo) }}" alt="Player Photo" style="width: 150px;">
                         @else
                             {{ __('messages.no_photo') }}
                         @endif
@@ -35,7 +37,7 @@
                             <form action="{{ route('players.destroy', $player->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('{{ __('messages.confirm_delete') }}')"style="margin-left: 20px;">{{ __('messages.delete') }}</button>
+                                <button type="submit" onclick="return confirm('{{ __('messages.confirm_delete') }}')" style="margin-left: 20px;,">{{ __('messages.delete') }}</button>
                             </form>
                         @endif
                     </td>
