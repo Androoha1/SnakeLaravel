@@ -10,9 +10,12 @@ use App\Http\Controllers\ReviewController;
 Route::middleware([LanguageSwitcher::class])->group(function () {
     Route::get('/', [LobbyController::class, 'index'])->name('home');
     Route::get('/lobby', [LobbyController::class, 'index'])->name('lobby');
+    
 
     Route::delete('/players/{id}', [PlayerController::class, 'destroy'])->name('players.destroy');
-
+    Route::resource('players', PlayerController::class);
+    Route::post('/update-score', [PlayerController::class, 'updateScore']);
+    Route::post('/update-best-score', [PlayerController::class, 'updateBestScore']);
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');

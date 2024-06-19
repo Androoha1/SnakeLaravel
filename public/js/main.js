@@ -60,7 +60,11 @@ window.onload = function() {
 
 var gameOver = false;
 function gameLoop() {
-    if (gameOver) return;
+    if (gameOver) { 
+        sendScoreToServer(score); 
+        updateBestScore(userId, score); 
+        return;
+    }
 
     //draw board
     context.fillStyle = '#000000';
@@ -83,6 +87,11 @@ function gameLoop() {
         while (field[apple.y/blockSize][apple.x/blockSize])
             apple.relocate();
         document.getElementById("score").textContent = score;
+    }
+
+
+    if (gameOver) { 
+        sendScoreToServer(score); // This function sends the score to the server
     }
 
     //Check all events
@@ -127,4 +136,39 @@ function changeDirection(e) {
             directionQueue2.push([1,0]);
             break;
     }
+}
+
+
+function sendScoreToServer(score) {
+    fetch('/update-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ score: score })
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Score updated:', data);
+      })
+      .catch((error) => {
+          console.error('Error updating score:', error);
+      });
+}
+
+function updateBestScore(userId, score) {
+    fetch('/update-best-score', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ userId: userId, score: score })
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Best score updated:', data);
+      })
+      .catch((error) => {
+          console.error('Error updating best score:', error);
+      });
 }

@@ -19,10 +19,6 @@
             <input type="email" name="email" value="{{ $player->email }}" required>
         </div>
         <div>
-            <label for="best_score">{{ __('messages.best_score') }}</label>
-            <input type="number" name="best_score" value="{{ $player->best_score }}" required>
-        </div>
-        <div>
             <label for="photo">{{ __('messages.photo') }}</label>
             <input type="file" name="photo" accept="image/*">
         </div>
